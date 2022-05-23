@@ -1,6 +1,9 @@
 package chess;
 
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
+import chess.pecas.Rei;
+import chess.pecas.Torre;
 
 public class PartidaXad {
 
@@ -8,6 +11,7 @@ public class PartidaXad {
 	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8,8);
+		setupInicial();
 	}
 	
 	public PecaXad[][] getPecas(){
@@ -18,6 +22,12 @@ public class PartidaXad {
 			}
 		}
 		return mat;
+	}
+	
+	private void setupInicial() {
+		tabs.posicPeca(new Torre(tabs, Cor.PRETO), new Posicao(2,1));
+		tabs.posicPeca(new Rei(tabs, Cor.PRETO), new Posicao(0,3));
+		tabs.posicPeca(new Rei(tabs, Cor.PRETO), new Posicao(7,4));
 	}
 	
 }

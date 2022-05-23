@@ -34,5 +34,9 @@ public class Tabuleiro {
 	public Peca pec(Posicao posic) {
 		return pecas[posic.getRow()][posic.getColumn()];
 	}
+	public void posicPeca(Peca peca, Posicao posic) {
+		pecas[posic.getRow()][posic.getColumn()]=peca;
+		peca.posic=posic;
+	}
 	
 }
