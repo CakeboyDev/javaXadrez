@@ -1,12 +1,13 @@
 package aplicativo;
 
-import boardgame.Tabuleiro;
+import chess.PartidaXad;
 
 public class Programa {
 
 	public static void main(String[] args) {
 
-		Tabuleiro tabul = new Tabuleiro(8,8);
+		PartidaXad parxad = new PartidaXad();
+		UI.printTab(parxad.getPecas());
 
 	}
 

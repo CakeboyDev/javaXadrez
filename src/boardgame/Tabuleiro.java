@@ -28,6 +28,11 @@ public class Tabuleiro {
 		this.columns = columns;
 	}
 	
-	
+	public Peca pec(int row, int column) {
+		return pecas[row][column];
+	}
+	public Peca pec(Posicao posic) {
+		return pecas[posic.getRow()][posic.getColumn()];
+	}
 	
 }
