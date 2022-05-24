@@ -19,6 +19,7 @@ public class PartidaXad {
 		Posicao origem = posDeOrigem.toPosic();
 		Posicao alvo = posicAlvo.toPosic();
 		validarPosicOrigem(origem);
+		validarPosicAlvo(origem, alvo);
 		Peca pecaCapturada = fazerMovimento(origem, alvo);
 		return (PecaXad)pecaCapturada;
 	}
@@ -36,6 +37,12 @@ public class PartidaXad {
 			throw new XadException("Não há movimentos possíveis para esta peça!");
 		}
 	}
+	private void validarPosicAlvo(Posicao origem, Posicao alvo) {
+		if(!tabs.pec(origem).movimentoPossivel(alvo)) {
+			throw new XadException("A peça escolhida não pode se mover para a posição desejada.");
+		}
+	}
+	
 	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
 		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
 	}

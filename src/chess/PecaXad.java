@@ -1,6 +1,7 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
 import boardgame.Peca;
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 //-----------------------------------------------------------------------------------------------------------------------------------
 public abstract class PecaXad extends Peca{
@@ -14,5 +15,10 @@ public abstract class PecaXad extends Peca{
 //GETTERS E SETTERS------------------------------------------------------------------------------------------------------------------
 	public Cor getCor() {
 		return cor;
-	}	
+	}
+//FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	protected boolean haPecaOponente(Posicao pos) {
+		PecaXad p = (PecaXad)getTabs().pec(posic);
+		return p != null && p.getCor() != cor;
+	}
 }
