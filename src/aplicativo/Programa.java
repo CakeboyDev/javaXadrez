@@ -22,6 +22,9 @@ public class Programa {
 				System.out.println();
 				System.out.print("Origem: ");
 				PosicXad origem = UI.lerPosicXad(sc);
+				boolean[][] possiveisMovimentos = parxad.possiveisMovimentos(origem);
+				UI.limparTela();
+				UI.printTab(parxad.getPecas(), possiveisMovimentos);
 				System.out.println();
 				System.out.print("Alvo: ");
 				PosicXad alvo = UI.lerPosicXad(sc);

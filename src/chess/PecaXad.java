@@ -19,6 +19,6 @@ public abstract class PecaXad extends Peca{
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	protected boolean haPecaOponente(Posicao pos) {
 		PecaXad p = (PecaXad)getTabs().pec(posic);
-		return p != null && p.getCor() != cor;
+		return p != null && p.getCor() == cor;
 	}
 }

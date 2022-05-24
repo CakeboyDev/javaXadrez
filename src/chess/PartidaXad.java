@@ -55,6 +55,12 @@ public class PartidaXad {
 		}
 		return mat;
 	}
+	public boolean[][] possiveisMovimentos(PosicXad posicOrigem){
+		Posicao posic = posicOrigem.toPosic();
+		validarPosicOrigem(posic);
+		return tabs.pec(posic).movimentosPossiveis();
+	}
+	
 	private void setupInicial() {
 		posicionarNovaPeca('c', 1, new Torre(tabs, Cor.BRANCO));
 		posicionarNovaPeca('c', 2, new Torre(tabs, Cor.BRANCO));

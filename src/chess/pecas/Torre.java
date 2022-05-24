@@ -25,8 +25,8 @@ public class Torre extends PecaXad {
 			mat[p.getRow()][p.getColumn()] = true;
 			p.setRow(p.getRow()-1);
 		}
-		if(getTabs().posicExiste(p)&&haPecaOponente(p)) {
-			
+		if(getTabs().posicExiste(p) && haPecaOponente(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		//ESQUERDA
 		p.setValores(posic.getRow(), posic.getColumn()-1);
@@ -35,7 +35,7 @@ public class Torre extends PecaXad {
 			p.setColumn(p.getColumn()-1);
 		}
 		if(getTabs().posicExiste(p)&&haPecaOponente(p)) {
-			
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		//ABAIXO
 		p.setValores(posic.getRow()+1, posic.getColumn());
@@ -44,7 +44,7 @@ public class Torre extends PecaXad {
 			p.setRow(p.getRow()+1);
 		}
 		if(getTabs().posicExiste(p)&&haPecaOponente(p)) {
-			
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		//DIREITA
 		p.setValores(posic.getRow(), posic.getColumn()+1);
@@ -53,7 +53,7 @@ public class Torre extends PecaXad {
 			p.setColumn(p.getColumn()+1);
 		}
 		if(getTabs().posicExiste(p)&&haPecaOponente(p)) {
-			
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		return mat;
 	}
