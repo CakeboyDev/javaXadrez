@@ -23,6 +23,32 @@ public class Tabuleiro {
 		return columns;
 	}	
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	public void posicPeca(Peca peca, Posicao posic) {
+		if(temPeca(posic)) {
+			throw new TabException("Erro ao colocar peça na posição: já existe uma peça na posição "+posic+".");
+		}
+		pecas[posic.getRow()][posic.getColumn()]=peca;
+		peca.posic=posic;
+	}
+	public Peca removePeca(Posicao pos) {
+		if(!posicExiste(pos)) {
+			throw new TabException("Posição não existe no tabuleiro!");
+		}
+		if(pec(pos)==null) {
+			return null;
+		}
+		Peca aux = pec(pos);
+		aux.posic=null;
+		pecas[pos.getRow()][pos.getColumn()]=null;
+		return aux;
+	}
+	public boolean posicExiste(int row, int column) {
+		return row>=0 && row<rows && column>=0 && column<columns;
+	}
+	public boolean posicExiste(Posicao pos) {
+		return posicExiste(pos.getRow(), pos.getColumn());
+	}
+//EXCEPTIONS-------------------------------------------------------------------------------------------------------------------------
 	public Peca pec(int row, int column) {
 		if(!posicExiste(row,column)) {
 			throw new TabException("Posição não existe no tabuleiro!");
@@ -35,20 +61,6 @@ public class Tabuleiro {
 		}
 		return pecas[posic.getRow()][posic.getColumn()];
 	}
-	public void posicPeca(Peca peca, Posicao posic) {
-		if(temPeca(posic)) {
-			throw new TabException("Erro ao colocar peça na posição: já existe uma peça na posição "+posic+".");
-		}
-		pecas[posic.getRow()][posic.getColumn()]=peca;
-		peca.posic=posic;
-	}
-	public boolean posicExiste(int row, int column) {
-		return row>=0 && row<rows && column>=0 && column<columns;
-	}
-	public boolean posicExiste(Posicao pos) {
-		return posicExiste(pos.getRow(), pos.getColumn());
-	}
-//EXCEPTIONS-------------------------------------------------------------------------------------------------------------------------
 	public boolean temPeca(Posicao pos) {
 		if(!posicExiste(pos)) {
 			throw new TabException("Posição não existe no tabuleiro!");

@@ -1,5 +1,7 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
+import boardgame.Peca;
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import chess.pecas.Rei;
 import chess.pecas.Torre;
@@ -13,12 +15,27 @@ public class PartidaXad {
 		setupInicial();
 	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
+		Posicao origem = posDeOrigem.toPosic();
+		Posicao alvo = posicAlvo.toPosic();
+		validarPosicOrigem(origem);
+		Peca pecaCapturada = fazerMovimento(origem, alvo);
+		return (PecaXad)pecaCapturada;
+	}
+	private Peca fazerMovimento(Posicao origem,Posicao alvo) {
+		Peca p = tabs.removePeca(origem);
+		Peca pecaCapturada = tabs.removePeca(alvo);
+		tabs.posicPeca(p, alvo);
+		return pecaCapturada;
+	}
+	private void validarPosicOrigem(Posicao pos) {
+		if(!tabs.temPeca(pos)) {
+			throw new XadException("Não existe peça na posição de origem!");
+		}
+	}
 	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
 		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
 	}
-	
-	
-	
 	public PecaXad[][] getPecas() {
 		PecaXad[][] mat = new PecaXad[tabs.getRows()][tabs.getColumns()];
 		for (int i = 0; i < tabs.getRows(); i++) {
