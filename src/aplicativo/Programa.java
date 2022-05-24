@@ -3,7 +3,6 @@ package aplicativo;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import chess.Cor;
 import chess.PartidaXad;
 import chess.PecaXad;
 import chess.PosicXad;
@@ -19,7 +18,6 @@ public class Programa {
 		while(true) {
 			try {
 				UI.limparTela();
-				System.out.println(Cor.BRANCO==Cor.PRETO);
 				UI.printTab(parxad.getPecas());
 				System.out.println();
 				System.out.print("Origem: ");
