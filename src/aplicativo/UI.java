@@ -1,12 +1,11 @@
+//IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package aplicativo;
-
 import chess.Cor;
 import chess.PecaXad;
-
+//-----------------------------------------------------------------------------------------------------------------------------------
 public class UI {
-
+//VARIÁVEIS E LISTAS-----------------------------------------------------------------------------------------------------------------
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
-
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -25,7 +24,7 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-
+//FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	public static void printTab(PecaXad[][] pecas) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
@@ -36,7 +35,6 @@ public class UI {
 		}
 		System.out.println("  a b c d e f g h");
 	}
-
 	public static void printPeca(PecaXad peca) {
     	if (peca == null) {
             System.out.print("-");

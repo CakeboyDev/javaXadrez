@@ -1,11 +1,12 @@
+//IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package boardgame;
-
+//-----------------------------------------------------------------------------------------------------------------------------------
 public class Tabuleiro {
-
+//VARIÁVEIS E LISTAS-----------------------------------------------------------------------------------------------------------------
 	private int rows;
 	private int columns;
 	private Peca[][] pecas;
-	
+//CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public Tabuleiro(int rows, int columns) {
 		if(rows<1||columns<1) {
 			throw new TabException("Erro ao criar tabuleiro: o tabuleiro deve ter pelo menos 1 linha e 1 coluna.");
@@ -14,14 +15,14 @@ public class Tabuleiro {
 		this.columns=columns;
 		pecas = new Peca[rows][columns];
 	}
-
+//GETTERS E SETTERS------------------------------------------------------------------------------------------------------------------
 	public int getRows() {
 		return rows;
 	}
 	public int getColumns() {
 		return columns;
 	}	
-	
+//FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	public Peca pec(int row, int column) {
 		if(!posicExiste(row,column)) {
 			throw new TabException("Posição não existe no tabuleiro!");
@@ -47,11 +48,11 @@ public class Tabuleiro {
 	public boolean posicExiste(Posicao pos) {
 		return posicExiste(pos.getRow(), pos.getColumn());
 	}
+//EXCEPTIONS-------------------------------------------------------------------------------------------------------------------------
 	public boolean temPeca(Posicao pos) {
 		if(!posicExiste(pos)) {
 			throw new TabException("Posição não existe no tabuleiro!");
 		}
 		return pec(pos)!=null;
-	}
-	
+	}	
 }

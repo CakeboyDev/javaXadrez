@@ -1,18 +1,24 @@
+//IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
-
 import boardgame.Tabuleiro;
 import chess.pecas.Rei;
 import chess.pecas.Torre;
-
+//-----------------------------------------------------------------------------------------------------------------------------------
 public class PartidaXad {
-
+//VARIÁVEIS E LISTAS-----------------------------------------------------------------------------------------------------------------
 	private Tabuleiro tabs;
-
+//CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
 		setupInicial();
 	}
-
+//FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
+		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
+	}
+	
+	
+	
 	public PecaXad[][] getPecas() {
 		PecaXad[][] mat = new PecaXad[tabs.getRows()][tabs.getColumns()];
 		for (int i = 0; i < tabs.getRows(); i++) {
@@ -22,11 +28,6 @@ public class PartidaXad {
 		}
 		return mat;
 	}
-
-	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
-		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
-	}
-
 	private void setupInicial() {
 		posicionarNovaPeca('c', 1, new Torre(tabs, Cor.BRANCO));
 		posicionarNovaPeca('c', 2, new Torre(tabs, Cor.BRANCO));
@@ -42,5 +43,4 @@ public class PartidaXad {
 		posicionarNovaPeca('e', 8, new Torre(tabs, Cor.PRETO));
 		posicionarNovaPeca('d', 8, new Rei(tabs, Cor.PRETO));
 	}
-
 }
