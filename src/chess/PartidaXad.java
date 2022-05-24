@@ -26,7 +26,7 @@ public class PartidaXad {
 	
 	private void setupInicial() {
 		tabs.posicPeca(new Torre(tabs, Cor.PRETO), new Posicao(2,1));
-		tabs.posicPeca(new Rei(tabs, Cor.PRETO), new Posicao(0,3));
+		tabs.posicPeca(new Rei(tabs, Cor.PRETO), new Posicao(7,7));
 		tabs.posicPeca(new Rei(tabs, Cor.PRETO), new Posicao(7,4));
 	}
 	
