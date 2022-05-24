@@ -32,6 +32,9 @@ public class PartidaXad {
 		if(!tabs.temPeca(pos)) {
 			throw new XadException("Não existe peça na posição de origem!");
 		}
+		if(!tabs.pec(pos).haQualquerMovimento()) {
+			throw new XadException("Não há movimentos possíveis para esta peça!");
+		}
 	}
 	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
 		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());

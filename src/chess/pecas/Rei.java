@@ -14,4 +14,9 @@ public class Rei extends PecaXad {
 	public String toString() {
 		return "R";
 	}
+	@Override
+	public boolean[][] movimentosPossiveis() {
+		boolean[][]mat = new boolean[getTabs().getRows()][getTabs().getColumns()];
+		return mat;
+	}
 }

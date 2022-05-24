@@ -14,4 +14,9 @@ public class Torre extends PecaXad {
 	public String toString() {
 		return "T";
 	}
+	@Override
+	public boolean[][] movimentosPossiveis() {
+		boolean[][]mat = new boolean[getTabs().getRows()][getTabs().getColumns()];
+		return mat;
+	}
 }
