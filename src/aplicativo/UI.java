@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import chess.Cor;
+import chess.PartidaXad;
 import chess.PecaXad;
 import chess.PosicXad;
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -43,6 +44,12 @@ public class UI {
 		catch(RuntimeException e) {
 			throw new InputMismatchException("Erro ao ler posição do xadrez. Valores válidos são de a1 à h8.");
 		}
+	}
+	
+	public static void printPartida(PartidaXad parxad){
+		printTab(parxad.getPecas());
+		System.out.println();
+		System.out.println("Turn: ");
 	}
 	
 	public static void printTab(PecaXad[][] pecas) {

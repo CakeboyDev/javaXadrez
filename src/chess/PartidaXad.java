@@ -9,10 +9,21 @@ import chess.pecas.Torre;
 public class PartidaXad {
 //VARIÁVEIS E LISTAS-----------------------------------------------------------------------------------------------------------------
 	private Tabuleiro tabs;
+	private int turno;
+	private Cor jogadorAtual;
 //CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
+		turno = 1;
+		jogadorAtual=Cor.BRANCO;
 		setupInicial();
+	}
+//GETTERS E SETTERS------------------------------------------------------------------------------------------------------------------
+	public int getTurno() {
+		return turno;
+	}
+	public Cor getJogadorAtual() {
+		return jogadorAtual;
 	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
@@ -21,6 +32,7 @@ public class PartidaXad {
 		validarPosicOrigem(origem);
 		validarPosicAlvo(origem, alvo);
 		Peca pecaCapturada = fazerMovimento(origem, alvo);
+		proximoTurno();
 		return (PecaXad)pecaCapturada;
 	}
 	private Peca fazerMovimento(Posicao origem,Posicao alvo) {
@@ -32,6 +44,9 @@ public class PartidaXad {
 	private void validarPosicOrigem(Posicao pos) {
 		if(!tabs.temPeca(pos)) {
 			throw new XadException("Não existe peça na posição de origem!");
+		}
+		if(jogadorAtual!=((PecaXad)tabs.pec(pos)).getCor()) {
+			throw new XadException("Essa peça não é sua!");
 		}
 		if(!tabs.pec(pos).haQualquerMovimento()) {
 			throw new XadException("Não há movimentos possíveis para esta peça!");
@@ -55,6 +70,11 @@ public class PartidaXad {
 		}
 		return mat;
 	}
+	private void proximoTurno() {
+		turno++;
+		jogadorAtual=(jogadorAtual ==Cor.BRANCO)? Cor.PRETO : Cor.BRANCO;
+	}
+	
 	public boolean[][] possiveisMovimentos(PosicXad posicOrigem){
 		Posicao posic = posicOrigem.toPosic();
 		validarPosicOrigem(posic);
