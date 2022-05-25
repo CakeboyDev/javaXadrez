@@ -26,6 +26,7 @@ public class PartidaXad {
 		return jogadorAtual;
 	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	//MOVIMENTAR---------------------------------------------------------------------------------------------------------------------
 	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
 		Posicao origem = posDeOrigem.toPosic();
 		Posicao alvo = posicAlvo.toPosic();
@@ -41,6 +42,7 @@ public class PartidaXad {
 		tabs.posicPeca(p, alvo);
 		return pecaCapturada;
 	}
+	//VALIDAR------------------------------------------------------------------------------------------------------------------------
 	private void validarPosicOrigem(Posicao pos) {
 		if(!tabs.temPeca(pos)) {
 			throw new XadException("Não existe peça na posição de origem!");
@@ -57,7 +59,12 @@ public class PartidaXad {
 			throw new XadException("A peça escolhida não pode se mover para a posição desejada.");
 		}
 	}
-	
+	public boolean[][] possiveisMovimentos(PosicXad posicOrigem){
+		Posicao posic = posicOrigem.toPosic();
+		validarPosicOrigem(posic);
+		return tabs.pec(posic).movimentosPossiveis();
+	}
+	//POSICIONAR----------------------------------------------------------------------------------------------------------------------
 	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
 		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
 	}
@@ -70,17 +77,12 @@ public class PartidaXad {
 		}
 		return mat;
 	}
+	//TURNOS---------------------------------------------------------------------------------------------------------------------------
 	private void proximoTurno() {
 		turno++;
 		jogadorAtual=(jogadorAtual ==Cor.BRANCO)? Cor.PRETO : Cor.BRANCO;
 	}
-	
-	public boolean[][] possiveisMovimentos(PosicXad posicOrigem){
-		Posicao posic = posicOrigem.toPosic();
-		validarPosicOrigem(posic);
-		return tabs.pec(posic).movimentosPossiveis();
-	}
-	
+	//SETUP---------------------------------------------------------------------------------------------------------------------------
 	private void setupInicial() {
 		posicionarNovaPeca('c', 1, new Torre(tabs, Cor.BRANCO));
 		posicionarNovaPeca('c', 2, new Torre(tabs, Cor.BRANCO));

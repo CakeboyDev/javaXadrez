@@ -49,7 +49,8 @@ public class UI {
 	public static void printPartida(PartidaXad parxad){
 		printTab(parxad.getPecas());
 		System.out.println();
-		System.out.println("Turn: ");
+		System.out.println("Turn: "+parxad.getTurno());
+		System.out.println("Aguardando jogador: "+parxad.getJogadorAtual());
 	}
 	
 	public static void printTab(PecaXad[][] pecas) {

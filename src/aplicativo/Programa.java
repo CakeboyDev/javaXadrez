@@ -18,7 +18,7 @@ public class Programa {
 		while(true) {
 			try {
 				UI.limparTela();
-				UI.printTab(parxad.getPecas());
+				UI.printPartida(parxad);
 				System.out.println();
 				System.out.print("Origem: ");
 				PosicXad origem = UI.lerPosicXad(sc);
