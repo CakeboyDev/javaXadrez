@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
+import chess.pecas.Bispo;
 import chess.pecas.Peao;
 import chess.pecas.Rei;
 import chess.pecas.Torre;
@@ -173,7 +174,9 @@ public class PartidaXad {
 	//SETUP---------------------------------------------------------------------------------------------------------------------------
 	private void setupInicial() {
 		posicionarNovaPeca('a', 1, new Torre(tabs, Cor.BRANCO));
+		posicionarNovaPeca('c', 1, new Bispo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('e', 1, new Rei(tabs, Cor.BRANCO));
+		posicionarNovaPeca('f', 1, new Bispo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('h', 1, new Torre(tabs, Cor.BRANCO));
 		
 		posicionarNovaPeca('a', 2, new Peao(tabs, Cor.BRANCO));
@@ -186,7 +189,9 @@ public class PartidaXad {
 		posicionarNovaPeca('h', 2, new Peao(tabs, Cor.BRANCO));
 
 		posicionarNovaPeca('a', 8, new Torre(tabs, Cor.PRETO));
+		posicionarNovaPeca('c', 8, new Bispo(tabs, Cor.PRETO));
 		posicionarNovaPeca('e', 8, new Rei(tabs, Cor.PRETO));
+		posicionarNovaPeca('f', 8, new Bispo(tabs, Cor.PRETO));
 		posicionarNovaPeca('h', 8, new Torre(tabs, Cor.PRETO));
 		
 		posicionarNovaPeca('a', 7, new Peao(tabs, Cor.PRETO));
