@@ -10,6 +10,7 @@ import boardgame.Tabuleiro;
 import chess.pecas.Bispo;
 import chess.pecas.Cavalo;
 import chess.pecas.Peao;
+import chess.pecas.Rainha;
 import chess.pecas.Rei;
 import chess.pecas.Torre;
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -177,6 +178,7 @@ public class PartidaXad {
 		posicionarNovaPeca('a', 1, new Torre(tabs, Cor.BRANCO));
 		posicionarNovaPeca('b', 1, new Cavalo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('c', 1, new Bispo(tabs, Cor.BRANCO));
+		posicionarNovaPeca('d', 1, new Rainha(tabs, Cor.BRANCO));
 		posicionarNovaPeca('e', 1, new Rei(tabs, Cor.BRANCO));
 		posicionarNovaPeca('f', 1, new Bispo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('g', 1, new Cavalo(tabs, Cor.BRANCO));
@@ -194,6 +196,7 @@ public class PartidaXad {
 		posicionarNovaPeca('a', 8, new Torre(tabs, Cor.PRETO));
 		posicionarNovaPeca('b', 8, new Cavalo(tabs, Cor.PRETO));
 		posicionarNovaPeca('c', 8, new Bispo(tabs, Cor.PRETO));
+		posicionarNovaPeca('d', 8, new Rainha(tabs, Cor.PRETO));
 		posicionarNovaPeca('e', 8, new Rei(tabs, Cor.PRETO));
 		posicionarNovaPeca('f', 8, new Bispo(tabs, Cor.PRETO));
 		posicionarNovaPeca('g', 8, new Cavalo(tabs, Cor.PRETO));
