@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
+import chess.pecas.Peao;
 import chess.pecas.Rei;
 import chess.pecas.Torre;
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -171,18 +172,30 @@ public class PartidaXad {
 	}
 	//SETUP---------------------------------------------------------------------------------------------------------------------------
 	private void setupInicial() {
-		posicionarNovaPeca('c', 1, new Torre(tabs, Cor.BRANCO));
-		posicionarNovaPeca('c', 2, new Torre(tabs, Cor.BRANCO));
-		posicionarNovaPeca('d', 2, new Torre(tabs, Cor.BRANCO));
-		posicionarNovaPeca('e', 2, new Torre(tabs, Cor.BRANCO));
-		posicionarNovaPeca('e', 1, new Torre(tabs, Cor.BRANCO));
-		posicionarNovaPeca('d', 1, new Rei(tabs, Cor.BRANCO));
+		posicionarNovaPeca('a', 1, new Torre(tabs, Cor.BRANCO));
+		posicionarNovaPeca('e', 1, new Rei(tabs, Cor.BRANCO));
+		posicionarNovaPeca('h', 1, new Torre(tabs, Cor.BRANCO));
+		
+		posicionarNovaPeca('a', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('b', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('c', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('d', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('e', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('f', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('g', 2, new Peao(tabs, Cor.BRANCO));
+		posicionarNovaPeca('h', 2, new Peao(tabs, Cor.BRANCO));
 
-		posicionarNovaPeca('c', 7, new Torre(tabs, Cor.PRETO));
-		posicionarNovaPeca('c', 8, new Torre(tabs, Cor.PRETO));
-		posicionarNovaPeca('d', 7, new Torre(tabs, Cor.PRETO));
-		posicionarNovaPeca('e', 7, new Torre(tabs, Cor.PRETO));
-		posicionarNovaPeca('e', 8, new Torre(tabs, Cor.PRETO));
-		posicionarNovaPeca('d', 8, new Rei(tabs, Cor.PRETO));
+		posicionarNovaPeca('a', 8, new Torre(tabs, Cor.PRETO));
+		posicionarNovaPeca('e', 8, new Rei(tabs, Cor.PRETO));
+		posicionarNovaPeca('h', 8, new Torre(tabs, Cor.PRETO));
+		
+		posicionarNovaPeca('a', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('b', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('c', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('d', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('e', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('f', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('g', 7, new Peao(tabs, Cor.PRETO));
+		posicionarNovaPeca('h', 7, new Peao(tabs, Cor.PRETO));
 	}
 }
