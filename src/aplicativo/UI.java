@@ -1,7 +1,10 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package aplicativo;
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.Cor;
 import chess.PartidaXad;
@@ -30,24 +33,15 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
+	//PRINTS-------------------------------------------------------------------------------------------------------------------------
 	public static void limparTela() {
 		System.out.println("\033[H\033[2J");
 		System.out.flush();
 	}
-	public static PosicXad lerPosicXad(Scanner sc) {
-		try {
-			String s = sc.nextLine();
-			char column = s.charAt(0);
-			int row = Integer.parseInt(s.substring(1));
-			return new PosicXad(column, row);
-		}
-		catch(RuntimeException e) {
-			throw new InputMismatchException("Erro ao ler posição do xadrez. Valores válidos são de a1 à h8.");
-		}
-	}
-	
-	public static void printPartida(PartidaXad parxad){
+	public static void printPartida(PartidaXad parxad, List<PecaXad> capturadas){
 		printTab(parxad.getPecas());
+		System.out.println();
+		printPecasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Turn: "+parxad.getTurno());
 		System.out.println("Aguardando jogador: "+parxad.getJogadorAtual());
@@ -89,5 +83,30 @@ public class UI {
             }
         }
         System.out.print(" ");
+	}
+	private static void printPecasCapturadas(List<PecaXad> capturada) {
+		List<PecaXad> branca = capturada.stream().filter(x -> x.getCor()==Cor.BRANCO).collect(Collectors.toList());
+		List<PecaXad> preta = capturada.stream().filter(x -> x.getCor()==Cor.PRETO).collect(Collectors.toList());
+		System.out.println("Peças capturadas:");
+		System.out.print("Brancas: ");
+		System.out.print(ANSI_WHITE);
+		System.out.println(Arrays.toString(branca.toArray()));
+		System.out.print(ANSI_RESET);
+		System.out.print("Pretas: ");
+		System.out.print(ANSI_YELLOW);
+		System.out.println(Arrays.toString(preta.toArray()));
+		System.out.print(ANSI_RESET);
+	}
+	//LEITURA--------------------------------------------------------------------------------------------------------------------------
+	public static PosicXad lerPosicXad(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new PosicXad(column, row);
+		}
+		catch(RuntimeException e) {
+			throw new InputMismatchException("Erro ao ler posição do xadrez. Valores válidos são de a1 à h8.");
+		}
 	}
 }
