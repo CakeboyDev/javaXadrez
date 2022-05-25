@@ -18,6 +18,7 @@ public class PartidaXad {
 	private List<Peca> pecasNoTab = new ArrayList<>();
 	private List<Peca> pecasCapturaddas = new ArrayList<>();
 	private boolean xeque;
+	private boolean xequeMate;
 //CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
@@ -35,6 +36,9 @@ public class PartidaXad {
 	public boolean getXeque() {
 		return xeque;
 	}
+	public boolean getXequeMate() {
+		return xequeMate;
+	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	//MOVIMENTAR---------------------------------------------------------------------------------------------------------------------
 	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
@@ -48,7 +52,11 @@ public class PartidaXad {
 			throw new XadException("Você não pode se colocar em xeque!");
 		}
 		xeque = (testeXeque(oponente(jogadorAtual)))?true:false;
-		proximoTurno();
+		if(testeXequeMate(oponente(jogadorAtual))) {
+			xequeMate=true;
+		}else {
+			proximoTurno();
+		}
 		return (PecaXad)pecaCapturada;
 	}
 	private Peca fazerMovimento(Posicao origem,Posicao alvo) {
@@ -129,6 +137,30 @@ public class PartidaXad {
 			}
 		}
 		return false;
+	}
+	private boolean testeXequeMate(Cor cor) {
+		if(!testeXeque(cor)) {
+			return false;
+		}
+		List<Peca> lista = pecasNoTab.stream().filter(x ->((PecaXad)x).getCor()==cor).collect(Collectors.toList());
+		for(Peca p:lista) {
+			boolean[][]mat=p.movimentosPossiveis();
+			for(int i=0;i<tabs.getRows();i++) {
+				for(int j=0;j<tabs.getColumns();j++) {
+					if(mat[i][j]) {
+						Posicao origem = ((PecaXad)p).getPosicXad().toPosic();
+						Posicao alvo = new Posicao(i,j);
+						Peca pecaCapturada=fazerMovimento(origem, alvo);
+						boolean testeXeque = testeXeque(cor);
+						desfazerMovimento(origem, alvo, pecaCapturada);
+						if(!testeXeque) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 	//TURNOS---------------------------------------------------------------------------------------------------------------------------
 	private void proximoTurno() {

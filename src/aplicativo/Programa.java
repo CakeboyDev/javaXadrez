@@ -17,7 +17,7 @@ public class Programa {
 		PartidaXad parxad = new PartidaXad();
 		List<PecaXad> capturadas = new ArrayList<>();
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
-		while(true) {
+		while(!parxad.getXequeMate()) {
 			try {
 				UI.limparTela();
 				UI.printPartida(parxad, capturadas);
@@ -42,5 +42,7 @@ public class Programa {
 				sc.nextLine();
 			}
 		}
+		UI.limparTela();
+		UI.printPartida(parxad, capturadas);
 	}
 }

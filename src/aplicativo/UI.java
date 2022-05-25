@@ -44,9 +44,14 @@ public class UI {
 		printPecasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Turn: "+parxad.getTurno());
-		System.out.println("Aguardando jogador: "+parxad.getJogadorAtual());
-		if(parxad.getXeque()) {
-			System.out.println("XEQUE!!!");
+		if(!parxad.getXequeMate()) {
+			System.out.println("Aguardando jogador: "+parxad.getJogadorAtual());
+			if(parxad.getXeque()) {
+				System.out.println("XEQUE!!!");
+			}
+		}else {
+			System.out.println("XEQUE MATE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("VENCEDOR: "+parxad.getJogadorAtual()+"!!!!!!!!!!!!!!!!!!!!!");
 		}
 	}
 	
