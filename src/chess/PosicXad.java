@@ -26,7 +26,7 @@ public class PosicXad {
 		return new Posicao(8-row, column-'a');
 	}
 	protected static PosicXad fromPosic(Posicao pos) {
-		return new PosicXad((char)('a'-pos.getColumn()), 8-pos.getRow()); 
+		return new PosicXad((char)('a'+pos.getColumn()), 8-pos.getRow()); 
 	}
 	@Override
 	public String toString() {

@@ -45,6 +45,9 @@ public class UI {
 		System.out.println();
 		System.out.println("Turn: "+parxad.getTurno());
 		System.out.println("Aguardando jogador: "+parxad.getJogadorAtual());
+		if(parxad.getXeque()) {
+			System.out.println("XEQUE!!!");
+		}
 	}
 	
 	public static void printTab(PecaXad[][] pecas) {

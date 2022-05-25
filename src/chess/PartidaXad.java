@@ -2,6 +2,7 @@
 package chess;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import boardgame.Peca;
 import boardgame.Posicao;
@@ -16,6 +17,7 @@ public class PartidaXad {
 	private Cor jogadorAtual;
 	private List<Peca> pecasNoTab = new ArrayList<>();
 	private List<Peca> pecasCapturaddas = new ArrayList<>();
+	private boolean xeque;
 //CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
@@ -30,6 +32,9 @@ public class PartidaXad {
 	public Cor getJogadorAtual() {
 		return jogadorAtual;
 	}
+	public boolean getXeque() {
+		return xeque;
+	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	//MOVIMENTAR---------------------------------------------------------------------------------------------------------------------
 	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
@@ -38,6 +43,11 @@ public class PartidaXad {
 		validarPosicOrigem(origem);
 		validarPosicAlvo(origem, alvo);
 		Peca pecaCapturada = fazerMovimento(origem, alvo);
+		if(testeXeque(jogadorAtual)) {
+			desfazerMovimento(origem, alvo, pecaCapturada);
+			throw new XadException("Você não pode se colocar em xeque!");
+		}
+		xeque = (testeXeque(oponente(jogadorAtual)))?true:false;
 		proximoTurno();
 		return (PecaXad)pecaCapturada;
 	}
@@ -50,6 +60,15 @@ public class PartidaXad {
 			pecasCapturaddas.add(pecaCapturada);
 		}
 		return pecaCapturada;
+	}
+	private void desfazerMovimento(Posicao origem, Posicao alvo, Peca pecaCapturada) {
+		Peca p = tabs.removePeca(alvo);
+		tabs.posicPeca(p, origem);
+		if(pecaCapturada!=null) {
+			tabs.posicPeca(pecaCapturada, alvo);
+			pecasCapturaddas.remove(pecaCapturada);
+			pecasNoTab.add(pecaCapturada);
+		}
 	}
 	//VALIDAR------------------------------------------------------------------------------------------------------------------------
 	private void validarPosicOrigem(Posicao pos) {
@@ -86,6 +105,30 @@ public class PartidaXad {
 			}
 		}
 		return mat;
+	}
+	//OPONENTE-------------------------------------------------------------------------------------------------------------------------
+	private Cor oponente(Cor cor) {
+		return (cor == Cor.BRANCO)? Cor.PRETO : Cor.BRANCO;
+	}
+	private PecaXad rei(Cor cor) {
+		List<Peca> lista = pecasNoTab.stream().filter(x ->((PecaXad)x).getCor()==cor).collect(Collectors.toList());
+		for(Peca p:lista) {
+			if(p instanceof Rei) {
+				return (PecaXad)p;
+			}
+		}
+		throw new IllegalStateException("Não há nenhum rei "+cor+" no tabuleiro!");
+	}
+	private boolean testeXeque(Cor cor) {
+		Posicao reiPosicao=rei(cor).getPosicXad().toPosic();
+		List<Peca> pecasOponentes = pecasNoTab.stream().filter(x ->((PecaXad)x).getCor()==oponente(cor)).collect(Collectors.toList());
+		for(Peca p:pecasOponentes) {
+			boolean[][]mat=p.movimentosPossiveis();
+			if(mat[reiPosicao.getRow()][reiPosicao.getColumn()]) {
+				return true;
+			}
+		}
+		return false;
 	}
 	//TURNOS---------------------------------------------------------------------------------------------------------------------------
 	private void proximoTurno() {
