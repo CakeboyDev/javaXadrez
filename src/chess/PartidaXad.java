@@ -60,7 +60,8 @@ public class PartidaXad {
 		return (PecaXad)pecaCapturada;
 	}
 	private Peca fazerMovimento(Posicao origem,Posicao alvo) {
-		Peca p = tabs.removePeca(origem);
+		PecaXad p = (PecaXad)tabs.removePeca(origem);
+		p.aumentaMoverContagem();
 		Peca pecaCapturada = tabs.removePeca(alvo);
 		tabs.posicPeca(p, alvo);
 		if(pecaCapturada!=null) {
@@ -70,7 +71,8 @@ public class PartidaXad {
 		return pecaCapturada;
 	}
 	private void desfazerMovimento(Posicao origem, Posicao alvo, Peca pecaCapturada) {
-		Peca p = tabs.removePeca(alvo);
+		PecaXad p = (PecaXad)tabs.removePeca(alvo);
+		p.diminuiMoverContagem();
 		tabs.posicPeca(p, origem);
 		if(pecaCapturada!=null) {
 			tabs.posicPeca(pecaCapturada, alvo);
