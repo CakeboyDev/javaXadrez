@@ -68,6 +68,23 @@ public class PartidaXad {
 		p.aumentaMoverContagem();
 		Peca pecaCapturada = tabs.removePeca(alvo);
 		tabs.posicPeca(p, alvo);
+		//Roque pequeno
+		if(p instanceof Rei&&alvo.getColumn()==origem.getColumn()+2) {
+			Posicao origemT = new Posicao(origem.getRow(),origem.getColumn()+3);
+			Posicao alvoT = new Posicao(origem.getRow(),origem.getColumn()+1);
+			PecaXad torre =(PecaXad)tabs.removePeca(origemT);
+			tabs.posicPeca(torre, alvoT);
+			torre.aumentaMoverContagem();
+		}
+		//Roque grande
+		if(p instanceof Rei&&alvo.getColumn()==origem.getColumn()-2) {
+			Posicao origemT = new Posicao(origem.getRow(),origem.getColumn()-4);
+			Posicao alvoT = new Posicao(origem.getRow(),origem.getColumn()-1);
+			PecaXad torre =(PecaXad)tabs.removePeca(origemT);
+			tabs.posicPeca(torre, alvoT);
+			torre.aumentaMoverContagem();
+		}
+		
 		if(pecaCapturada!=null) {
 			pecasNoTab.remove(pecaCapturada);
 			pecasCapturaddas.add(pecaCapturada);
@@ -82,6 +99,22 @@ public class PartidaXad {
 			tabs.posicPeca(pecaCapturada, alvo);
 			pecasCapturaddas.remove(pecaCapturada);
 			pecasNoTab.add(pecaCapturada);
+		}
+		//Roque pequeno
+		if(p instanceof Rei&&alvo.getColumn()==origem.getColumn()+2) {
+			Posicao origemT = new Posicao(origem.getRow(),origem.getColumn()+3);
+			Posicao alvoT = new Posicao(origem.getRow(),origem.getColumn()+1);
+			PecaXad torre =(PecaXad)tabs.removePeca(alvoT);
+			tabs.posicPeca(torre, origemT);
+			torre.diminuiMoverContagem();
+		}
+		//Roque grande
+		if(p instanceof Rei&&alvo.getColumn()==origem.getColumn()-2) {
+			Posicao origemT = new Posicao(origem.getRow(),origem.getColumn()-4);
+			Posicao alvoT = new Posicao(origem.getRow(),origem.getColumn()-1);
+			PecaXad torre =(PecaXad)tabs.removePeca(alvoT);
+			tabs.posicPeca(torre, origemT);
+			torre.diminuiMoverContagem();
 		}
 	}
 	//VALIDAR------------------------------------------------------------------------------------------------------------------------
@@ -179,7 +212,7 @@ public class PartidaXad {
 		posicionarNovaPeca('b', 1, new Cavalo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('c', 1, new Bispo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('d', 1, new Rainha(tabs, Cor.BRANCO));
-		posicionarNovaPeca('e', 1, new Rei(tabs, Cor.BRANCO));
+		posicionarNovaPeca('e', 1, new Rei(tabs, Cor.BRANCO,this));
 		posicionarNovaPeca('f', 1, new Bispo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('g', 1, new Cavalo(tabs, Cor.BRANCO));
 		posicionarNovaPeca('h', 1, new Torre(tabs, Cor.BRANCO));
@@ -197,7 +230,7 @@ public class PartidaXad {
 		posicionarNovaPeca('b', 8, new Cavalo(tabs, Cor.PRETO));
 		posicionarNovaPeca('c', 8, new Bispo(tabs, Cor.PRETO));
 		posicionarNovaPeca('d', 8, new Rainha(tabs, Cor.PRETO));
-		posicionarNovaPeca('e', 8, new Rei(tabs, Cor.PRETO));
+		posicionarNovaPeca('e', 8, new Rei(tabs, Cor.PRETO,this));
 		posicionarNovaPeca('f', 8, new Bispo(tabs, Cor.PRETO));
 		posicionarNovaPeca('g', 8, new Cavalo(tabs, Cor.PRETO));
 		posicionarNovaPeca('h', 8, new Torre(tabs, Cor.PRETO));
