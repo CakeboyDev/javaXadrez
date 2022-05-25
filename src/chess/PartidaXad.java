@@ -1,5 +1,8 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
@@ -11,6 +14,8 @@ public class PartidaXad {
 	private Tabuleiro tabs;
 	private int turno;
 	private Cor jogadorAtual;
+	private List<Peca> pecasNoTab = new ArrayList<>();
+	private List<Peca> pecasCapturaddas = new ArrayList<>();
 //CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
@@ -40,6 +45,10 @@ public class PartidaXad {
 		Peca p = tabs.removePeca(origem);
 		Peca pecaCapturada = tabs.removePeca(alvo);
 		tabs.posicPeca(p, alvo);
+		if(pecaCapturada!=null) {
+			pecasNoTab.remove(pecaCapturada);
+			pecasCapturaddas.add(pecaCapturada);
+		}
 		return pecaCapturada;
 	}
 	//VALIDAR------------------------------------------------------------------------------------------------------------------------
@@ -67,6 +76,7 @@ public class PartidaXad {
 	//POSICIONAR----------------------------------------------------------------------------------------------------------------------
 	private void posicionarNovaPeca(char column, int row, PecaXad peca) {
 		tabs.posicPeca(peca, new PosicXad(column, row).toPosic());
+		pecasNoTab.add(peca);
 	}
 	public PecaXad[][] getPecas() {
 		PecaXad[][] mat = new PecaXad[tabs.getRows()][tabs.getColumns()];
