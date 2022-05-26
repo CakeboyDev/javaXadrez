@@ -1,5 +1,6 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class PartidaXad {
 	private boolean xeque;
 	private boolean xequeMate;
 	private PecaXad vulneravelEnPassant;
+	private PecaXad promovido;
 //CONSTRUCTORS-----------------------------------------------------------------------------------------------------------------------	
 	public PartidaXad() {
 		tabs = new Tabuleiro(8, 8);
@@ -47,6 +49,9 @@ public class PartidaXad {
 	public PecaXad getVulneravelEnPassant() {
 		return vulneravelEnPassant;
 	}
+	public PecaXad getPromovido() {
+		return promovido;
+	}
 //FUNÇÕES----------------------------------------------------------------------------------------------------------------------------
 	//MOVIMENTAR---------------------------------------------------------------------------------------------------------------------
 	public PecaXad fazerMovimentoXad(PosicXad posDeOrigem, PosicXad posicAlvo) {
@@ -60,6 +65,16 @@ public class PartidaXad {
 			throw new XadException("Você não pode se colocar em xeque!");
 		}
 		PecaXad pecaMovida=(PecaXad)tabs.pec(alvo);
+		//PROMOÇÃO===================================================================================================================
+		promovido=null;
+		if(pecaMovida instanceof Peao) {
+			if((pecaMovida.getCor()==Cor.BRANCO&&alvo.getRow()==0)||(pecaMovida.getCor()==Cor.PRETO&&alvo.getRow()==7)) {
+				promovido =(PecaXad)tabs.pec(alvo);
+				promovido = trocarPecaPromovida("H"); 
+				
+			}
+		}
+		
 		xeque = (testeXeque(oponente(jogadorAtual)))?true:false;
 		if(testeXequeMate(oponente(jogadorAtual))) {
 			xequeMate=true;
@@ -74,6 +89,29 @@ public class PartidaXad {
 		}
 		return (PecaXad)pecaCapturada;
 	}
+	
+	public PecaXad trocarPecaPromovida(String tipo) {
+		if(promovido==null) {
+			throw new IllegalStateException("Não há peça para ser promovida!");
+		}
+		if(!tipo.equals("H")&&!tipo.equals("T")&&!tipo.equals("B")&&!tipo.equals("C")) {
+			throw new InvalidParameterException("Tipo inválido para promoção!");
+		}
+		Posicao pos = promovido.getPosicXad().toPosic();
+		Peca p = tabs.removePeca(pos);
+		pecasNoTab.remove(p);
+		PecaXad novaPeca= novaPeca(tipo, promovido.getCor());
+		tabs.posicPeca(novaPeca, pos);
+		pecasNoTab.add(novaPeca);
+		return novaPeca;
+	}
+	private PecaXad novaPeca(String tipo, Cor cor) {
+		if(tipo.equals("B")) {return new Bispo(tabs,cor);}
+		if(tipo.equals("C")) {return new Cavalo(tabs,cor);}
+		if(tipo.equals("H")) {return new Rainha(tabs,cor);}
+		return new Torre(tabs,cor);
+	}
+	
 	private Peca fazerMovimento(Posicao origem,Posicao alvo) {
 		PecaXad p = (PecaXad)tabs.removePeca(origem);
 		p.aumentaMoverContagem();

@@ -34,6 +34,11 @@ public class Programa {
 				if(pecaCapturada!=null) {
 					capturadas.add(pecaCapturada);
 				}
+				if(parxad.getPromovido()!=null) {
+					System.out.print("Digite a peça para qual deseja promover(T/B/C/H): ");
+					String tipo = sc.nextLine();
+					parxad.trocarPecaPromovida(tipo.toUpperCase());
+				}
 			}catch(XadException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
