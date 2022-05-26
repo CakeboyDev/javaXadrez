@@ -36,8 +36,12 @@ public class Programa {
 				}
 				if(parxad.getPromovido()!=null) {
 					System.out.print("Digite a peça para qual deseja promover(T/B/C/H): ");
-					String tipo = sc.nextLine();
-					parxad.trocarPecaPromovida(tipo.toUpperCase());
+					String tipo = sc.nextLine().toUpperCase();
+					while(!tipo.equals("H")&&!tipo.equals("T")&&!tipo.equals("B")&&!tipo.equals("C")) {
+						System.out.print("Valor inválido! Digite a peça para qual deseja promover(T/B/C/H): ");
+						tipo = sc.nextLine().toUpperCase();
+					}
+					parxad.trocarPecaPromovida(tipo);
 				}
 			}catch(XadException e) {
 				System.out.println(e.getMessage());

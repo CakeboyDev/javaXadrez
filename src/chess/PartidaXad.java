@@ -1,6 +1,5 @@
 //IMPORTAÇÕES------------------------------------------------------------------------------------------------------------------------
 package chess;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,7 +94,7 @@ public class PartidaXad {
 			throw new IllegalStateException("Não há peça para ser promovida!");
 		}
 		if(!tipo.equals("H")&&!tipo.equals("T")&&!tipo.equals("B")&&!tipo.equals("C")) {
-			throw new InvalidParameterException("Tipo inválido para promoção!");
+			return promovido;
 		}
 		Posicao pos = promovido.getPosicXad().toPosic();
 		Peca p = tabs.removePeca(pos);
